@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Game from "./Game";
-import "./reset.css";
-import "./main.css";
+import "./css/reset.css";
+import "./css/main.css";
 
 ReactDOM.render(
   <Game />,
