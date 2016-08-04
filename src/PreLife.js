@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Aframe from "aframe";
-import {Animation, Entity, Scene} from "aframe-react";
+import {Entity} from "aframe-react";
 
 import Text from "./Text";
 
@@ -9,7 +8,7 @@ export default class PreLife extends Component {
   constructor(props) {
     super();
 
-    this.createPlayer = this.createPlayer.bind(this);
+    this.signIn = this.signIn.bind(this);
 
     this.state = {
       state: "initial",
@@ -20,34 +19,8 @@ export default class PreLife extends Component {
 
   }
 
-  createPlayer() {
-    const that = this;
-    const localStorageData = JSON.parse( localStorage.getItem("Game") );
-
-    that.setState({state: "creating"});
-
-    Meteor.call(
-      "players.create",
-      localStorageData.playerID,
-      function (error, matchID) {
-        if (error) {
-          that.setState({state: "error"});
-          console.log(error);
-        }
-        else if (matchID) {
-          that.setState({state: "redirecting"});
-        }
-      }
-    );
-  }
-
-  getPlayTextOffset(state) {
-    if (state == "initial") {
-      return this.tileSize * 0.375 * 0.5;
-    }
-    else {
-      return this.tileSize * 0.375 * 0.333;
-    }
+  signIn() {
+    this.props.signIn();
   }
 
   getSmallText(state) {
@@ -59,6 +32,7 @@ export default class PreLife extends Component {
       case "redirecting":
         return "Redirecting to game…";
       case "error":
+      default:
         return "Error! Try again?";
     }
   }
@@ -73,68 +47,57 @@ export default class PreLife extends Component {
           size={30}
           position={[
             -30 * 4,
-            -30 / 2,
+            30 / 2,
             -100,
           ]}
         />
 
-        {/* <Rotator rotation={[20,0,0]}>
-          <Entity
-            class="start-playing-button"
-            geometry={{
-              primitive: "box",
-              width: this.tileSize * 2,
-              height: this.tileThickness,
-              depth: this.tileSize,
-            }}
-            material={{
-              color: "green",
-              shader: "flat",
-            }}
+        <Entity
+          class="start-playing-button"
+          geometry={{
+            primitive: "box",
+            width: 5,
+            height: 0.1,
+            depth: 2,
+          }}
+          material={{
+            color: "green",
+            shader: "flat",
+          }}
+          rotation={[
+            90,
+            0,
+            0,
+          ]}
+          position={[
+            0,
+            -1.5,
+            -8,
+          ]}
+          onClick={this.signIn}
+        >
+
+          <Text
+            text={[
+              "PLAY",
+              this.getSmallText(this.state.state),
+            ]}
+            size={1}
+            lineHeight={2}
             rotation={[
-              90,
+              -90,
               0,
               0,
             ]}
-            onClick={this.createPlayer}
-          >
+            position={[
+              -1.6,
+              0.1,
+              0.5,
+            ]}
+            onClick={this.signIn}
+          />
 
-            <Text
-              text="PLAY"
-              size={this.tileSize * 0.375}
-              height={this.tileThickness}
-              rotation={[
-                -90,
-                0,
-                0,
-              ]}
-              position={[
-                -this.tileSize * 0.375 * 1.6,
-                this.tileThickness * 0.5 * 0.5,
-                this.getPlayTextOffset(this.state.state),
-              ]}
-              onClick={this.createPlayer}
-            />
-
-            <Text
-              text={this.getSmallText(this.state.state)}
-              size={this.tileSize * 0.125}
-              height={this.tileThickness}
-              rotation={[
-                -90,
-                0,
-                0,
-              ]}
-              position={[
-                -this.tileSize * 0.375 * 1.6,
-                this.tileThickness * 0.5 * 0.5,
-                this.tileSize * 0.375,
-              ]}
-              onClick={this.createPlayer}
-            />
-
-          </Entity>
-        </Rotator> */}
+        </Entity>
 
       </Entity>
     );

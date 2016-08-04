@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Aframe from "aframe";
-import {Animation, Entity, Scene} from "aframe-react";
+import {Entity} from "aframe-react";
 
 import Text from "./Text";
 
@@ -8,80 +7,68 @@ export default class Life extends Component {
 
   constructor(props) {
     super();
+
+    this.signOut = this.signOut.bind(this);
   }
 
   componentDidUpdate() {
 
   }
 
-  test() {
-    console.log("test");
-  }
-
-  getEarthRadius() {
-    return 6371000;
+  signOut() {
+    console.log("is this");
+    this.props.signOut();
   }
 
   render() {
     return (
       <Entity id="life">
 
-        {/* <Target
-          rotation={[-45, 2, 0]}
-          doOnClick={this.test}
-        >
-          <Text
-            text={["Planet", "It's blue!"]}
-          />
-        </Target>
-
         <Entity
-          position={[
-            0,
-            -this.getEarthRadius() * 0.91,
-            -this.getEarthRadius() * 1.25,
-          ]}
+          class="start-playing-button"
           geometry={{
-            primitive: "sphere",
-            radius: this.getEarthRadius(),
-            segmentsWidth: 36,
-            segmentsHeight: 72,
+            primitive: "box",
+            width: 6,
+            height: 0.1,
+            depth: 2,
           }}
           material={{
-            color: "cyan",
+            color: "red",
+            shader: "flat",
           }}
-        />
-
-        <Target
-          rotation={[70, 50, 50]}
-          doOnClick={this.test}
+          rotation={[
+            90,
+            0,
+            0,
+          ]}
+          position={[
+            0,
+            -1.5,
+            -8,
+          ]}
+          onClick={this.signOut}
         >
+
           <Text
-            text={["Star"]}
+            text={[
+              "Sign out",
+            ]}
+            size={1}
+            lineHeight={2}
+            rotation={[
+              -90,
+              0,
+              0,
+            ]}
+            position={[
+              -2.5,
+              0.1,
+              0.5,
+            ]}
+            onClick={this.signOut}
           />
-        </Target>
 
-        <Rotator
-          distance={this.AU}
-          rotation={[70, 50, 50]}
-        >
-          <Entity
-            geometry={{
-              primitive: "sphere",
-              radius: 695700000,
-              segmentsWidth: 9,
-              segmentsHeight: 18,
-            }}
-            material={{
-              shader: "flat",
-              color: "yellow",
-            }}
-            light={{
-              type: "directional",
-              color: "#aaa",
-            }}
-          />
-        </Rotator> */}
+        </Entity>
 
       </Entity>
     );

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Aframe from "aframe";
-import {Animation, Entity, Scene} from "aframe-react";
+import {Entity} from "aframe-react";
 import "aframe-text-component";
 
 export default class Text extends Component {
@@ -55,19 +54,19 @@ export default class Text extends Component {
   }
 
   getPosition(position, size) {
-    const offset = (size / 2);
+    // const offset = (size / 2);
 
     if (position) {
       return [
         position[0],
-        position[1] - offset,
+        position[1],
         position[2],
       ];
     }
     else {
       return [
         0,
-        0 - offset,
+        0,
         0,
       ];
     }

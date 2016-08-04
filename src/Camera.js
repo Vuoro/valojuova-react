@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Aframe from "aframe";
-import {Animation, Entity, Scene} from "aframe-react";
+import {Entity} from "aframe-react";
 import Extras from "aframe-extras";
 Extras.controls.registerAll();
 

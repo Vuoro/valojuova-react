@@ -1,16 +1,18 @@
 import React, { Component } from "react";
-import Aframe from "aframe";
-import {Animation, Entity, Scene} from "aframe-react";
+import "aframe";
+import {Entity, Scene} from "aframe-react";
 
 import Camera from "./Camera";
 import PreLife from "./PreLife";
 import Life from "./Life";
 
-import starfield from "./images/starfield.png"
+import starfield from "./images/starfield.png";
 
 class World extends Component {
   constructor(props) {
     super();
+
+    this.getComponentByState = this.getComponentByState.bind(this);
   }
 
   componentDidMount() {
@@ -24,12 +26,20 @@ class World extends Component {
   getComponentByState(player) {
     if (player) {
       return (
-        <Life player={player}/>
+        <Life
+          game={this.props.game}
+          connection={this.props.connection}
+          signOut={this.props.signOut}
+        />
       );
     }
     else {
       return (
-        <PreLife/>
+        <PreLife
+          game={this.props.game}
+          connection={this.props.connection}
+          signIn={this.props.signIn}
+        />
       );
     }
   }
@@ -62,10 +72,10 @@ class World extends Component {
 
         <Camera
           id="camera"
-          width={this.props.gameState.width}
-          height={this.props.gameState.height}
-          inVR={this.props.gameState.inVR}
-          devMode={this.props.gameState.devMode}
+          width={this.props.game.width}
+          height={this.props.game.height}
+          inVR={this.props.game.inVR}
+          devMode={this.props.game.devMode}
         />
 
         <Entity
@@ -94,7 +104,7 @@ class World extends Component {
           position={this.getCameraCenter()}
         >
 
-          {this.getComponentByState(this.props.player)}
+          {this.getComponentByState(this.props.connection.player)}
 
         </Entity>
 

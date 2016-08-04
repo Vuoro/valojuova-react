@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Aframe from "aframe";
-import {Animation, Entity, Scene} from "aframe-react";
+import {Animation, Entity} from "aframe-react";
 
 export default class Cursor extends Component {
 
@@ -18,7 +17,7 @@ export default class Cursor extends Component {
     }
 
     this.cursorSize = 0.05;
-    this.gridRadius = 4;
+    this.gridRadius = 20;
     this.UIRadius = this.gridRadius - 1;
     this.UISpace = this.gridRadius - this.UIRadius;
     this.gridThickness = 0.003;
