@@ -16,7 +16,6 @@ export default class Life extends Component {
   }
 
   signOut() {
-    console.log("is this");
     this.props.signOut();
   }
 
