@@ -12,7 +12,7 @@
     "aframe-text-component": "^0.3.0",
     "combokeys": "^2.4.6",
     "firebase": "^3.2.1",
-    "jonikorpi-base-files": "^1.0.1",
+    "jonikorpi-base-files": "^2.0.0",
     "react": "^15.3.0",
     "react-dom": "^15.2.1",
     "react-localstorage": "^0.2.9",
