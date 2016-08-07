@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Entity} from "aframe-react";
-import Extras from "aframe-extras";
-Extras.controls.registerAll();
+// import Extras from "aframe-extras";
+// Extras.controls.registerAll();
 
 import Cursor from "./Cursor";
 
@@ -23,6 +23,9 @@ export default class Camera extends Component {
             far: 50*1000,
             near: this.props.near || 0.001,
             fov: this.props.inVR ? 80 : 90,
+          }}
+          look-controls={{
+            enabled: true
           }}
           universal-controls={{
             movementEnabled: this.props.devMode,
